@@ -5,7 +5,12 @@
     <title>登陆</title>
   </head>
   <body>
-    <header></header>
+    <header>
+      {% for message in get_flashed_messages() %}
+      <div>{{ message }}</div>
+      {% endfor %}
+      <a href="{{ url_for('index') }}">返回首页</a>
+    </header>
     <main>
       <form method="post">
         {{ form.csrf_token }}

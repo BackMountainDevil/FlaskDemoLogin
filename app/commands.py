@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 import click
 from app import app, db
-from app.models import Message, User
+from app.models import User
 
 
 @app.cli.command()
@@ -23,25 +23,28 @@ def forge(count):
     """  
     from faker import Faker  # noqa
 
-    # db.drop_all()
-    # db.create_all()
-
     fake = Faker()
     click.echo('Working...')
 
     for i in range(count):
-        message = Message(
-            name=fake.name(),
-            body=fake.sentence(),
-            timestamp=fake.date_time_this_year()
-        )
         user = User(
             id=i,
             username=fake.name(),
             password='123456'
         )
         db.session.add(user)
-        db.session.add(message)
 
     db.session.commit()
-    click.echo('Created %d fake messages.' % count)
+    click.echo('Created %d fake datas.' % count)
+
+
+@app.cli.command()
+def addadmin():
+    user = User(
+            id=999,
+            username='admin',
+            password='123456'
+        )
+    db.session.add(user)
+    db.session.commit()
+    click.echo('Add test user: ( admin, 123456)')

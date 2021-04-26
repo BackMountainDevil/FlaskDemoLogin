@@ -37,4 +37,4 @@ def isauth():
         return '已成功登陆'+session['AUTH']
     else:
         flash(u'登陆尚未成功，请重新登陆')
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
