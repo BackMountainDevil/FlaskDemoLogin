@@ -7,7 +7,7 @@ from app.models import User
 
 @app.route('/')
 def index():
-    return 'here is index'
+    return render_template('index.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -17,9 +17,7 @@ def login():
         '''验证表单'''
         username = form.username.data
         password = form.password.data
-        print(username,password)
         user = User.query.filter(User.username==username, User.password==password).first()
-        print(user)
         if user:
             session['AUTH'] = username
         return redirect(url_for('isauth'))
@@ -37,4 +35,6 @@ def isauth():
     '''
     if 'AUTH' in session:
         return '已成功登陆'+session['AUTH']
-    return redirect(url_for('login'))
+    else:
+        flash(u'登陆尚未成功，请重新登陆')
+        return redirect(url_for('index'))
