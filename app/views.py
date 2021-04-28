@@ -33,8 +33,9 @@ def isauth():
     已登陆： 显示'已成功登陆'
     未登陆： 重定向到登陆页面
     '''
-    if 'AUTH' in session:
-        return '已成功登陆'+session['AUTH']
+    if 'AUTH' in session: 
+        flash('已成功登陆' + session['AUTH'])
+        return redirect(url_for('index'))
     else:
         flash(u'登陆尚未成功，请重新登陆')
         return redirect(url_for('login'))
