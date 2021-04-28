@@ -38,3 +38,15 @@ def isauth():
     else:
         flash(u'登陆尚未成功，请重新登陆')
         return redirect(url_for('login'))
+
+
+@app.route('/logout')
+def logout():
+    '''
+    退出登陆
+    删除session中的标志
+    重定向到首页
+    '''
+    if 'AUTH' in session:
+        session.pop('AUTH')
+    return redirect(url_for('index'))
