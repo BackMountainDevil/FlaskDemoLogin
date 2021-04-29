@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>用户登陆认证测试页面</title>
+  </head>
+  <body>
+    <header>
+      {% for message in get_flashed_messages() %}
+      <div>{{ message }}</div>
+      {% endfor %}
+      <a href="{{ url_for('index') }}">返回首页</a>
+
+      {% if current_user.is_authenticated %}
+            Hi {{ current_user.username }}!你已经成功登陆了
+        <br><a href="{{ url_for('logout') }}">注销</a>
+        {% else %}
+            <br>
+            <p>
+                未登录是不可能到这里的，说明用户认证出现异常！！！
+            </p>
+        {% endif %}
+    </header>
+
+    <main>
+        此处为正文，假装有机密内容，需要登陆认证才能看的那种
+    </main>
+
+    <footer></footer>
+  </body>
+</html>

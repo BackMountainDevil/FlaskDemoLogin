@@ -47,7 +47,7 @@ def isauth():
     '''
     if current_user.is_authenticated:
         flash('已成功登陆')
-        return redirect(url_for('index'))
+        return render_template('isauth.html')
     else:
         flash(u'登陆尚未成功，请重新登陆')
         return redirect(url_for('login'))
