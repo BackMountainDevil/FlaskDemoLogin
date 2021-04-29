@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from app import app, login_manager
 from flask import render_template, redirect, url_for, request, session, flash
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, login_required
 from app.forms import LoginForm
 from app.models import User
 
@@ -39,18 +39,14 @@ def login():
 
 
 @app.route('/auth')
+@login_required
 def isauth():
     '''
     是否登陆测试页面
     已登陆： 显示'已成功登陆'
     未登陆： 重定向到登陆页面
     '''
-    if current_user.is_authenticated:
-        flash('已成功登陆')
-        return render_template('isauth.html')
-    else:
-        flash(u'登陆尚未成功，请重新登陆')
-        return redirect(url_for('login'))
+    return render_template('isauth.html')
 
 
 @app.route('/logout')
