@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from app import app, login_manager
 from flask import render_template, redirect, url_for, request, session, flash
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, current_user
 from app.forms import LoginForm
 from app.models import User
 
@@ -34,10 +34,7 @@ def login():
         if user:
             print("user: ", user, "username: ", user.username, 'id== ', user.id)
             login_user(user)    # 登入用户。此处传的是user 而不是 user.id
-            session['AUTH'] = username
         return redirect(url_for('isauth'))
-    if 'AUTH' in session:    
-        session.pop('AUTH')
     return render_template('login.html', form=form)
 
 
@@ -48,8 +45,8 @@ def isauth():
     已登陆： 显示'已成功登陆'
     未登陆： 重定向到登陆页面
     '''
-    if 'AUTH' in session: 
-        flash('已成功登陆' + session['AUTH'])
+    if current_user.is_authenticated:
+        flash('已成功登陆')
         return redirect(url_for('index'))
     else:
         flash(u'登陆尚未成功，请重新登陆')
@@ -60,12 +57,9 @@ def isauth():
 def logout():
     '''
     退出登陆
-    删除session中的标志
     使用 flask-login 的注销用户功能
     重定向到首页
     '''
     logout_user()   # 注销  flask-login 中的用户
     flash('成功注销', 'info')
-    if 'AUTH' in session:
-        session.pop('AUTH')
     return redirect(url_for('index'))
