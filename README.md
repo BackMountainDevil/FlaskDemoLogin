@@ -43,6 +43,12 @@ ps： 本代码为了简单，密码采用明文存储，在实际生产项目�
 
 提示： 使用 `git tag -n` 命令可以查看项目中所有标签
 
+## flask-login
+
+一个方便我们进行登陆认证的 flask 插件，本质上也是通过 session 操作，对其进行了封装，不需要我们直接操作 session,使用此插件时要避免在 session 使用 `user_id` 和 `remember_token` 作为键
+
+
+
 # 快速上手
 
 ## 安装环境
