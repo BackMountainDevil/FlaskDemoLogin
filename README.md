@@ -47,7 +47,7 @@ ps： 本代码为了简单，密码采用明文存储，在实际生产项目�
 
 一个方便我们进行登陆认证的 flask 插件，本质上也是通过 session 操作，对其进行了封装，不需要我们直接操作 session,使用此插件时要避免在 session 使用 `user_id` 和 `remember_token` 作为键
 
-
+可以使用 `git checkout flask-login` 来查看该版本对于的代码
 
 # 快速上手
 
