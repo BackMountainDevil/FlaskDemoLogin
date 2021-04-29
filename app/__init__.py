@@ -11,5 +11,9 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+# 指定未登录时进入登陆保护的页面之后跳转的目标页面
+login_manager.login_view = 'login'
+login_manager.login_message = u'请先登陆'
+login_manager.login_message_categoty = 'warning'
 
 from app import views, commands, errors  # noqa
