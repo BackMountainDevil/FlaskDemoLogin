@@ -23,6 +23,13 @@
       假装有大量内容
     </main>
 
-    <footer></footer>
+    <footer>
+      <!-- 登陆才显示 -->
+      {% if current_user.is_authenticated %}
+        Hi {{ current_user.username }}!
+      {% else %}
+      <a href="{{ url_for('login') }}">登陆</a>
+      {% endif %}
+    </footer>
   </body>
 </html>
